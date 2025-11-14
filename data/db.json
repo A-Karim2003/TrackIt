@@ -1,0 +1,51 @@
+{
+  "subjects": [
+    {
+      "id": 1,
+      "name": "React",
+      "tasks": [
+        { "id": 1, "text": "Learn JSX basics", "completed": true },
+        { "id": 2, "text": "Practice useState", "completed": true },
+        {
+          "id": 3,
+          "text": "Understand useEffect dependencies",
+          "completed": false
+        },
+        { "id": 4, "text": "Build a custom hook", "completed": false },
+        { "id": 5, "text": "Learn React Router", "completed": true },
+        {
+          "id": 6,
+          "text": "Memoize components using React.memo",
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "JavaScript",
+      "tasks": [
+        { "id": 1, "text": "Learn closures", "completed": true },
+        { "id": 2, "text": "Understand promises", "completed": true },
+        { "id": 3, "text": "Use async/await", "completed": false },
+        {
+          "id": 4,
+          "text": "Master array methods (.map, .filter)",
+          "completed": true
+        },
+        { "id": 5, "text": "Learn event loop", "completed": false }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Computer Science",
+      "tasks": [
+        { "id": 1, "text": "Understand Big-O notation", "completed": true },
+        { "id": 2, "text": "Learn binary search", "completed": false },
+        { "id": 3, "text": "Practice linked lists", "completed": false },
+        { "id": 4, "text": "Study hash tables", "completed": true },
+        { "id": 5, "text": "Implement stack/queue", "completed": true },
+        { "id": 6, "text": "Solve 10 algorithm problems", "completed": false }
+      ]
+    }
+  ]
+}
