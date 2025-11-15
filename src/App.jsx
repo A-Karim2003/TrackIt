@@ -6,7 +6,7 @@ import AppLayout from "./AppLayout";
 
 function App() {
   return (
-    <div className="min-h-screen">
+    <div className="h-screen">
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Dashboard />} />

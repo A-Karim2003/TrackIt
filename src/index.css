@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+  --color-customGreen: #44c1b3;
+  --color-customOrange: #fe914e;
+  --color-customRed: #c7293b;
+  --color-customGrey: #89909b;
+
+  --color-bgCustomGreen: rgba(68, 193, 178, 0.3);
+  --color-bgCustomOrange: rgba(254, 145, 78, 0.3);
+  --color-bgCustomRed: rgba(199, 41, 59, 0.3);
+}
+
 * {
   box-sizing: border-box;
 }
