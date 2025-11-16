@@ -1,9 +1,12 @@
 import DashboardInfo from "../components/AppLayout/DashboardInfo";
 import { PiBookOpenLight } from "react-icons/pi";
-import SubjectOverview from "../components/AppLayout/SubjectOverview";
+import { LuCircleCheckBig } from "react-icons/lu";
+import { MdTrendingUp } from "react-icons/md";
+
 import { useSubjects } from "../context/SubjectsProvider";
 import LoadingSpinner from "../components/LoadingSpinner";
 import { useMemo } from "react";
+import SubjectOverview from "../components/SubjectOverview";
 
 function Dashboard() {
   const { subjects, status } = useSubjects();
@@ -14,8 +17,6 @@ function Dashboard() {
       return [...acc, ...subject.tasks];
     }, []);
   }, [subjects]);
-
-  console.log(allTasks);
 
   if (status === "loading") return <LoadingSpinner />;
 
@@ -28,13 +29,13 @@ function Dashboard() {
         bgColor={"bg-bgCustomGreen"}
       />
       <DashboardInfo
-        icon={<PiBookOpenLight className="h-10 w-10" />}
+        icon={<LuCircleCheckBig className="h-10 w-10" />}
         title={"Completed Tasks"}
-        quantity={`2/5`}
+        quantity={`2/${allTasks.length}`}
         bgColor={"bg-bgCustomOrange"}
       />
       <DashboardInfo
-        icon={<PiBookOpenLight className="h-10 w-10" />}
+        icon={<MdTrendingUp className="h-10 w-10" />}
         title={"Overall Progress"}
         quantity={`40%`}
         bgColor={"bg-bgCustomRed"}

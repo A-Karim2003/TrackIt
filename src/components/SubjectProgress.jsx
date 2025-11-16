@@ -1,8 +1,8 @@
 function SubjectProgress({ subjectName, taskQuantity }) {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col hover:bg-gray-100 p-4 rounded-xl cursor-pointer">
       <div className="flex items-center gap-4 j">
-        <div className="h-[15px] w-[15px] bg-customGreen rounded-full "></div>
+        <div className="h-[15px] w-[15px] bg-customGreen rounded-full"></div>
         <h4>{subjectName}</h4>
         <small className="text-[14px] text-customGrey">
           {taskQuantity} tasks

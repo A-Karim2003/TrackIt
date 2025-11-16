@@ -1,11 +1,11 @@
-import { useSubjects } from "../../context/SubjectsProvider";
+import { useSubjects } from "../context/SubjectsProvider";
+import Card from "./Card";
 import SubjectProgress from "./SubjectProgress";
 
 function SubjectOverview() {
   const { subjects } = useSubjects();
-
   return (
-    <section className="w-full m-auto p-8 flex flex-col gap-4 shadow-sm bg-white rounded-xl">
+    <Card className="flex-col">
       <div className="flex items-center justify-between w-full mb-4">
         <h3 className="font-bold text-xl tracking-[1px]">Subject Overview</h3>
         <small className="text-[#5853E7] text-[16px] cursor-pointer">
@@ -13,7 +13,7 @@ function SubjectOverview() {
         </small>
       </div>
 
-      <div className="flex flex-col gap-12 px-4">
+      <div className="flex flex-col gap-8 ">
         {subjects.map((subject) => {
           return (
             <SubjectProgress
@@ -24,7 +24,7 @@ function SubjectOverview() {
           );
         })}
       </div>
-    </section>
+    </Card>
   );
 }
 
