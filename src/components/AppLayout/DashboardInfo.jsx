@@ -2,7 +2,7 @@ function DashboardInfo({ icon, title, quantity, bgColor }) {
   return (
     <div className="w-full m-auto p-8 flex gap-4 shadow-sm bg-white rounded-xl">
       <div
-        className={`h-14 w-14 flex items-center justify-center rounded-md text-customGreen bg-${bgColor}`}
+        className={`h-14 w-14 flex items-center justify-center rounded-md text-customGreen ${bgColor}`}
       >
         {icon}
       </div>

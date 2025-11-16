@@ -1,6 +1,9 @@
+import { useSubjects } from "../../context/SubjectsProvider";
 import SubjectProgress from "./SubjectProgress";
 
 function SubjectOverview() {
+  const { subjects } = useSubjects();
+
   return (
     <section className="w-full m-auto p-8 flex flex-col gap-4 shadow-sm bg-white rounded-xl">
       <div className="flex items-center justify-between w-full mb-4">
@@ -11,9 +14,15 @@ function SubjectOverview() {
       </div>
 
       <div className="flex flex-col gap-12 px-4">
-        <SubjectProgress subjectName={"React"} taskQuantity={2} />
-        <SubjectProgress subjectName={"JavaScript"} taskQuantity={4} />
-        <SubjectProgress subjectName={"Data Science"} taskQuantity={1} />
+        {subjects.map((subject) => {
+          return (
+            <SubjectProgress
+              key={subject.id}
+              subjectName={subject.name}
+              taskQuantity={subject.tasks.length}
+            />
+          );
+        })}
       </div>
     </section>
   );

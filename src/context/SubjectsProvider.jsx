@@ -10,6 +10,12 @@ function reducer(state, action) {
       return {};
     case "DELETE/SUBJECTS":
       return {};
+    case "loading":
+      return { ...state, status: "loading" };
+    case "success":
+      return { ...state, status: "success" };
+    case "error":
+      return { ...state, status: "error" };
     default:
       throw new Error("Unknown action");
   }
@@ -24,17 +30,25 @@ function SubjectsProvider({ children }) {
 
   //? READ SUBJECTS
   useEffect(() => {
+    dispatch({ type: "loading" });
     async function fetchSubjects() {
-      const res = await fetch("http://localhost:9000/subjects", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      try {
+        const res = await fetch("http://localhost:9000/subjects", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-      const subjects = await res.json();
-      dispatch({ type: "CREATE/SUBJECTS", payload: subjects });
+        const subjects = await res.json();
+        dispatch({ type: "CREATE/SUBJECTS", payload: subjects });
+        dispatch({ type: "success" });
+      } catch (error) {
+        dispatch({ type: "error" });
+        console.error(error.message);
+      }
     }
+
     fetchSubjects();
   }, []);
 
