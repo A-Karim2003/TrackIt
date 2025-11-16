@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function NavLinks() {
   return (
-    <nav className="px-12 h-10 min-h-14">
+    <nav className=" h-10 min-h-14">
       <ul className="flex justify-start items-center gap-4 h-full">
         <NavLink
           to="/"
