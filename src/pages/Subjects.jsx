@@ -1,5 +1,11 @@
+import AddSubject from "../components/AddSubject";
+
 function Subjects() {
-  return <div></div>;
+  return (
+    <div>
+      <AddSubject />
+    </div>
+  );
 }
 
 export default Subjects;

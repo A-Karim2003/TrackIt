@@ -1,6 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 function SubjectProgress({ subjectName, taskQuantity }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col hover:bg-gray-100 p-4 rounded-xl cursor-pointer">
+    <div
+      className="flex flex-col hover:bg-gray-100 p-4 rounded-xl cursor-pointer"
+      onClick={() => navigate("subjects")}
+    >
       <div className="flex items-center gap-4 j">
         <div className="h-[15px] w-[15px] bg-customGreen rounded-full"></div>
         <h4>{subjectName}</h4>

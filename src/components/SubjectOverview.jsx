@@ -1,5 +1,6 @@
 import { useSubjects } from "../context/SubjectsProvider";
 import Card from "./Card";
+import SectionTitle from "./SectionTitle";
 import SubjectProgress from "./SubjectProgress";
 
 function SubjectOverview() {
@@ -7,7 +8,7 @@ function SubjectOverview() {
   return (
     <Card className="flex-col">
       <div className="flex items-center justify-between w-full mb-4">
-        <h3 className="font-bold text-xl tracking-[1px]">Subject Overview</h3>
+        <SectionTitle title="Subject Overview" />
         <small className="text-[#5853E7] text-[16px] cursor-pointer">
           View All &rarr;
         </small>
