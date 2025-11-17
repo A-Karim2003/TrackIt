@@ -1,7 +1,7 @@
 import { useSubjects } from "../context/SubjectsProvider";
 import Card from "./Card";
 import SectionTitle from "./SectionTitle";
-import SubjectProgress from "./SubjectProgress";
+import Subject from "./Subject";
 
 function SubjectOverview() {
   const { subjects } = useSubjects();
@@ -15,15 +15,14 @@ function SubjectOverview() {
       </div>
 
       <div className="flex flex-col gap-8 ">
-        {subjects.map((subject) => {
-          return (
-            <SubjectProgress
-              key={subject.id}
-              subjectName={subject.name}
-              taskQuantity={subject.tasks.length}
-            />
-          );
-        })}
+        {subjects.map((subject) => (
+          <Subject key={subject.id} subject={subject}>
+            <small className="text-[14px] text-customGrey">
+              {subject.tasks.length} tasks
+            </small>
+            <small className="text-[14px] text-customGrey ml-auto">50%</small>
+          </Subject>
+        ))}
       </div>
     </Card>
   );
