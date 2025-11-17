@@ -4,6 +4,7 @@ import Subjects from "./pages/Subjects";
 // import Subject from "./pages/Subject";
 import AppLayout from "./AppLayout";
 import { SubjectsProvider } from "./context/SubjectsProvider";
+import Temp from "./pages/temp";
 
 function App() {
   return (
@@ -11,9 +12,9 @@ function App() {
       <SubjectsProvider>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route path="/" element={<Dashboard />} />
+            <Route index element={<Dashboard />} />
             <Route path="/Subjects" element={<Subjects />}>
-              {/* <Route path=":id" element={<Subject />} /> */}
+              <Route path=":id" element={<Temp />} />
             </Route>
           </Route>
         </Routes>

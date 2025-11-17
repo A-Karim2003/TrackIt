@@ -1,12 +1,8 @@
-import { useNavigate } from "react-router-dom";
-
-function Subject({ subject, children }) {
-  const navigate = useNavigate();
-
+function Subject({ subject, children, className, onClick }) {
   return (
     <div
-      className={`flex flex-col hover:bg-gray-100 p-4 rounded-xl cursor-pointer `}
-      onClick={() => navigate("/subjects")}
+      className={` ${className} cursor-pointer flex flex-col p-4 rounded-xl`}
+      onClick={onClick}
     >
       <div className="flex items-center gap-4 j">
         <div className="h-[15px] w-[15px] bg-customGreen rounded-full"></div>
