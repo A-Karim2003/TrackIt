@@ -6,7 +6,7 @@ function Subject({ subject, children, className, onClick }) {
     >
       <div className="flex items-center gap-4 j">
         <div className="h-[15px] w-[15px] bg-customGreen rounded-full"></div>
-        <h4>{subject.name}</h4>
+        <h4>{subject?.name}</h4>
 
         {children}
       </div>

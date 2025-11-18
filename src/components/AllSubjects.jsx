@@ -23,7 +23,7 @@ function AllSubjects() {
             key={subject.id}
             subject={subject}
             className="border border-slate-300 "
-            onClick={() => navigate("")}
+            onClick={() => navigate(`/subjects/${subject.id}`)}
           >
             <small className="text-[14px] text-customGrey">
               {`0/${subject.tasks.length}`} tasks completed

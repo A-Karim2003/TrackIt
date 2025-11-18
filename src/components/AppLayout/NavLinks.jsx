@@ -5,7 +5,7 @@ function NavLinks() {
     <nav className=" h-10 min-h-14">
       <ul className="flex justify-start items-center gap-4 h-full">
         <NavLink
-          to="/"
+          to="/dashboard"
           className={({ isActive }) =>
             isActive
               ? "h-full w-22 flex justify-center items-center border-b-2 border-[#44C1B3] "
@@ -16,7 +16,7 @@ function NavLinks() {
         </NavLink>
 
         <NavLink
-          to="subjects"
+          to="/subjects"
           className={({ isActive }) =>
             isActive
               ? "h-full w-22 flex justify-center items-center border-b-2 border-[#44C1B3] "

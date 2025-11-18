@@ -1,7 +1,7 @@
 import AddSubject from "../components/AddSubject";
 import AllSubjects from "../components/AllSubjects";
 
-function Subjects() {
+function SubjectsSection() {
   return (
     <div className="flex flex-col gap-8">
       <AddSubject />
@@ -10,4 +10,4 @@ function Subjects() {
   );
 }
 
-export default Subjects;
+export default SubjectsSection;

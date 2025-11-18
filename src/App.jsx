@@ -1,10 +1,9 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
-import Subjects from "./pages/Subjects";
-// import Subject from "./pages/Subject";
+import SubjectsSection from "./pages/SubjectsSection";
 import AppLayout from "./AppLayout";
 import { SubjectsProvider } from "./context/SubjectsProvider";
-import Temp from "./pages/temp";
+import SubjectDetail from "./pages/SubjectDetail";
 
 function App() {
   return (
@@ -12,10 +11,10 @@ function App() {
       <SubjectsProvider>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="/Subjects" element={<Subjects />}>
-              <Route path=":id" element={<Temp />} />
-            </Route>
+            <Route index element={<Navigate to="/dashboard" replace />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="/subjects" element={<SubjectsSection />} />
+            <Route path="/subjects/:id" element={<SubjectDetail />} />
           </Route>
         </Routes>
       </SubjectsProvider>

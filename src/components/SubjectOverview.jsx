@@ -22,7 +22,7 @@ function SubjectOverview() {
             key={subject.id}
             subject={subject}
             className=" hover:bg-gray-100"
-            onClick={() => navigate("subjects")}
+            onClick={() => navigate("/subjects")}
           >
             <small className="text-[14px] text-customGrey">
               {subject.tasks.length} tasks
