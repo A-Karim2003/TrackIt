@@ -5,10 +5,10 @@ import Card from "./Card";
 import LoadingSpinner from "./LoadingSpinner";
 import SectionTitle from "./SectionTitle";
 import Subject from "./Subject";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function AllSubjects() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { subjects, status } = useSubjects();
 
   if (status === "loading") return <LoadingSpinner />;
@@ -23,6 +23,7 @@ function AllSubjects() {
             key={subject.id}
             subject={subject}
             className="border border-slate-300 "
+            onClick={() => navigate("")}
           >
             <small className="text-[14px] text-customGrey">
               {`0/${subject.tasks.length}`} tasks completed
