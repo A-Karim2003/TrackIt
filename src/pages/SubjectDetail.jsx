@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSubjects } from "../context/SubjectsProvider";
 import Card from "../components/Card";
 import Subject from "../components/Subject";
@@ -10,6 +10,7 @@ import Task from "../components/Task";
 function SubjectDetail() {
   const { id } = useParams();
   const { subjects, status } = useSubjects();
+  const navigate = useNavigate();
 
   if (status === "loading" || !subjects.length) return <LoadingSpinner />;
 
@@ -18,7 +19,10 @@ function SubjectDetail() {
   return (
     <div className="flex flex-col gap-8">
       <div className="mb-4">
-        <small className="text-customGrey text-[16px] cursor-pointer">
+        <small
+          className="text-customGrey text-[16px] cursor-pointer"
+          onClick={() => navigate("/subjects")}
+        >
           &larr; Back to Subjects
         </small>
       </div>
