@@ -5,6 +5,7 @@ import Subject from "../components/Subject";
 import LoadingSpinner from "../components/LoadingSpinner";
 import AddForm from "../components/AddForm";
 import SectionTitle from "../components/SectionTitle";
+import Task from "../components/Task";
 
 function SubjectDetail() {
   const { id } = useParams();
@@ -37,8 +38,9 @@ function SubjectDetail() {
 
       <Card className="w-full flex flex-col">
         <SectionTitle title="Tasks" />
-        //! Create a loop for interate through task and generate a checkable
-        task component
+        {subject.tasks.map((task) => {
+          return <Task key={task.id} id={task.id} taskName={task.text} />;
+        })}
       </Card>
     </div>
   );
