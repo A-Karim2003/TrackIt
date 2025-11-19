@@ -1,17 +1,14 @@
-import { useSubjects } from "../context/SubjectsProvider";
 import { RiDeleteBin5Line } from "react-icons/ri";
 
 import Card from "./Card";
-import LoadingSpinner from "./LoadingSpinner";
 import SectionTitle from "./SectionTitle";
 import Subject from "./Subject";
 import { useNavigate } from "react-router-dom";
+import { useSubjects } from "../context/SubjectsProvider";
 
 function AllSubjects() {
   const navigate = useNavigate();
-  const { subjects, status } = useSubjects();
-
-  if (status === "loading") return <LoadingSpinner />;
+  const { subjects } = useSubjects();
 
   return (
     <Card className="flex flex-col gap-8">

@@ -14,6 +14,7 @@ function SubjectDetail() {
 
   if (status === "loading" || !subjects.length) return <LoadingSpinner />;
 
+  //* Gets the current subject
   const subject = subjects.find((subject) => subject.id === id);
 
   return (

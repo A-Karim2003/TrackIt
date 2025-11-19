@@ -1,14 +1,6 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useReducer,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 function reducer(state, action) {
-  console.log(action, state);
-
   switch (action.type) {
     case "CREATE/SUBJECTS":
       return { ...state, subjects: action.payload };
@@ -72,8 +64,12 @@ function SubjectsProvider({ children }) {
     });
   }
 
+  function addSubject(subject) {
+    dispatch({ type: "Add/Subject", payload: subject });
+  }
+
   return (
-    <SubjectsContext value={{ subjects, status, addTask }}>
+    <SubjectsContext value={{ subjects, status, addTask, addSubject }}>
       {children}
     </SubjectsContext>
   );
