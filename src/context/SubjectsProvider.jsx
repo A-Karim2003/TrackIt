@@ -1,8 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 
 function reducer(state, action) {
-  console.log(action);
-
   switch (action.type) {
     case "CREATE/SUBJECT":
       return { ...state, subjects: [...state.subjects, action.payload] };
@@ -32,8 +30,20 @@ function SubjectsProvider({ children }) {
     status: "idle",
   });
 
-  function addSubject(subject) {
-    dispatch({ type: "CREATE/SUBJECT", payload: subject });
+  async function addSubject(subject) {
+    const res = await fetch("http://localhost:9000/subjects", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+
+      body: JSON.stringify(subject),
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    dispatch({ type: "CREATE/SUBJECT", payload: data });
   }
 
   //? FETCH SUBJECTS

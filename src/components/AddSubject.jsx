@@ -19,12 +19,17 @@ function AddSubject() {
     };
 
     addSubject(subject);
+    setSubjectName("");
   }
 
   return (
     <Card className="flex flex-col">
       <SectionTitle title="Add New Subject" />
-      <AddForm onSubmit={handleSubmit} setValue={setSubjectName} />
+      <AddForm
+        onSubmit={handleSubmit}
+        setValue={setSubjectName}
+        value={subjectName}
+      />
     </Card>
   );
 }

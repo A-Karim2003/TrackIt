@@ -1,4 +1,4 @@
-function AddForm({ placeholder, onSubmit, setValue }) {
+function AddForm({ placeholder, onSubmit, setValue, value }) {
   return (
     <form className="flex gap-2 w-full" onSubmit={onSubmit}>
       <input
@@ -6,6 +6,7 @@ function AddForm({ placeholder, onSubmit, setValue }) {
         className="border border-customGrey flex-1 rounded-lg px-4 py-2 text-[16px] focus:outline-customOrange"
         placeholder={placeholder || "Enter task name"}
         onChange={(e) => setValue(e.target.value)}
+        value={value}
       />
       <button className="px-4 py-2 bg-customGreen text-white text-shadow-sm text-shadow-black rounded-lg hover:opacity-85">
         + Add
