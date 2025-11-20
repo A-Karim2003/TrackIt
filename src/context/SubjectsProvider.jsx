@@ -1,17 +1,19 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 
 function reducer(state, action) {
+  console.log(action);
+
   switch (action.type) {
-    case "CREATE/SUBJECTS":
-      return { ...state, subjects: action.payload };
+    case "CREATE/SUBJECT":
+      return { ...state, subjects: [...state.subjects, action.payload] };
     case "READ/SUBJECTS":
+      return { ...state, subjects: action.payload };
+    case "UPDATE/SUBJECT":
       return {};
-    case "UPDATE/SUBJECTS":
-      return {};
-    case "DELETE/SUBJECTS":
+    case "DELETE/SUBJECT":
       return {};
     case "Add/Task":
-      return { ...state };
+      return {};
     case "loading":
       return { ...state, status: "loading" };
     case "success":
@@ -30,7 +32,11 @@ function SubjectsProvider({ children }) {
     status: "idle",
   });
 
-  //? READ SUBJECTS
+  function addSubject(subject) {
+    dispatch({ type: "CREATE/SUBJECT", payload: subject });
+  }
+
+  //? FETCH SUBJECTS
   useEffect(() => {
     dispatch({ type: "loading" });
     async function fetchSubjects() {
@@ -43,7 +49,7 @@ function SubjectsProvider({ children }) {
         });
 
         const subjects = await res.json();
-        dispatch({ type: "CREATE/SUBJECTS", payload: subjects });
+        dispatch({ type: "READ/SUBJECTS", payload: subjects });
         dispatch({ type: "success" });
       } catch (error) {
         dispatch({ type: "error" });
@@ -54,22 +60,8 @@ function SubjectsProvider({ children }) {
     fetchSubjects();
   }, []);
 
-  function addTask(task, subjectId) {
-    dispatch({
-      type: "Add/Task",
-      payload: {
-        task,
-        subjectId,
-      },
-    });
-  }
-
-  function addSubject(subject) {
-    dispatch({ type: "Add/Subject", payload: subject });
-  }
-
   return (
-    <SubjectsContext value={{ subjects, status, addTask, addSubject }}>
+    <SubjectsContext value={{ subjects, status, addSubject }}>
       {children}
     </SubjectsContext>
   );
