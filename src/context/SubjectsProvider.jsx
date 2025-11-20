@@ -78,8 +78,12 @@ function SubjectsProvider({ children }) {
     fetchSubjects();
   }, []);
 
-  //? DELETE SUBJECT
+  //? UPDATE SUBJECTS
+  // async function updateSubject(id) {
+  //   const res
+  // }
 
+  //? DELETE SUBJECT
   async function deleteSubject(id) {
     const res = await fetch(`${ENDPOINT}/${id}`, {
       method: "DELETE",

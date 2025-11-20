@@ -1,14 +1,16 @@
-import { RiDeleteBin5Line } from "react-icons/ri";
-
 import Card from "./Card";
 import SectionTitle from "./SectionTitle";
 import Subject from "./Subject";
 import { useNavigate } from "react-router-dom";
 import { useSubjects } from "../context/SubjectsProvider";
+import { useState } from "react";
+import Actions from "./Actions";
 
 function AllSubjects() {
   const navigate = useNavigate();
   const { subjects, deleteSubject } = useSubjects();
+  const [isEditingId, setIsEditingId] = useState();
+  console.log(isEditingId);
 
   return (
     <Card className="flex flex-col gap-8">
@@ -21,16 +23,16 @@ function AllSubjects() {
             subject={subject}
             className="border border-slate-300 "
             onClick={() => navigate(`/subjects/${subject.id}`)}
+            isEditingId={isEditingId}
+            setIsEditingId={setIsEditingId}
           >
             <small className="text-[14px] text-customGrey">
               {`0/${subject.tasks.length}`} tasks completed
             </small>
-            <RiDeleteBin5Line
-              className="ml-auto text-customRed h-5 w-5 cursor-pointer hover:scale-120 transition duration-300"
-              onClick={(e) => {
-                e.stopPropagation();
-                deleteSubject(subject.id);
-              }}
+            <Actions
+              subject={subject}
+              deleteSubject={deleteSubject}
+              setIsEditingId={setIsEditingId}
             />
           </Subject>
         ))}
