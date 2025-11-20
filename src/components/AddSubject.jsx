@@ -10,7 +10,7 @@ function AddSubject() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!subjectName) return;
+    if (!subjectName.trim()) return;
 
     const subject = {
       id: crypto.randomUUID(),

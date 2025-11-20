@@ -2,67 +2,52 @@
   "subjects": [
     {
       "id": "1",
-      "name": "React",
+      "name": "Mathematics",
       "tasks": [
         {
           "id": 1,
-          "text": "Learn JSX basics",
+          "text": "Review integration techniques",
           "completed": false
         },
         {
           "id": 2,
-          "text": "Practice useState",
-          "completed": false
+          "text": "Practice differential equations",
+          "completed": true
         },
         {
           "id": 3,
-          "text": "Understand useEffect dependencies",
+          "text": "Understand eigenvalues and eigenvectors",
           "completed": false
         },
         {
           "id": 4,
-          "text": "Build a custom hook",
-          "completed": false
-        },
-        {
-          "id": 5,
-          "text": "Learn React Router",
-          "completed": false
-        },
-        {
-          "id": 6,
-          "text": "Memoize components using React.memo",
+          "text": "Solve 5 problems on probability distributions",
           "completed": false
         }
       ]
     },
     {
       "id": "2",
-      "name": "JavaScript",
+      "name": "Physics",
       "tasks": [
         {
           "id": 1,
-          "text": "Learn closures",
-          "completed": false
+          "text": "Study Newton's laws of motion",
+          "completed": true
         },
         {
           "id": 2,
-          "text": "Understand promises",
+          "text": "Review thermodynamics concepts (entropy, enthalpy)",
           "completed": false
         },
         {
           "id": 3,
-          "text": "Use async/await",
+          "text": "Practice kinematics problems",
           "completed": false
         },
         {
           "id": 4,
-          "text": "Master array methods (.map, .filter)",
-          "completed": false
-        },
-        {
-          "id": 5,
-          "text": "Learn event loop",
+          "text": "Learn about quantum entanglement",
           "completed": false
         }
       ]
@@ -84,7 +69,7 @@
         {
           "id": 3,
           "text": "Practice linked lists",
-          "completed": false
+          "completed": true
         },
         {
           "id": 4,
@@ -94,18 +79,49 @@
         {
           "id": 5,
           "text": "Implement stack/queue",
-          "completed": false
+          "completed": true
         },
         {
           "id": 6,
           "text": "Solve 10 algorithm problems",
           "completed": false
+        },
+        {
+          "id": 7,
+          "text": "Setup a Git repository",
+          "completed": false
+        },
+        {
+          "id": 8,
+          "text": "Write a basic REST API mock",
+          "completed": false
         }
       ]
     },
     {
-      "id": "b57b65f3-0073-40a5-b908-3975f3a8776d",
-      "name": "test",
+      "id": "4",
+      "name": "Literature",
+      "tasks": [
+        {
+          "id": 1,
+          "text": "Read '1984' by George Orwell",
+          "completed": false
+        },
+        {
+          "id": 2,
+          "text": "Write a critique of a Shakespearean sonnet",
+          "completed": false
+        },
+        {
+          "id": 3,
+          "text": "Review Romanticism era characteristics",
+          "completed": true
+        }
+      ]
+    },
+    {
+      "id": "c6314a5a-6055-4dbd-9bf2-08bda89cf903",
+      "name": "wasdwasdwasd",
       "tasks": []
     }
   ]

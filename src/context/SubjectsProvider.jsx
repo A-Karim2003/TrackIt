@@ -9,7 +9,12 @@ function reducer(state, action) {
     case "UPDATE/SUBJECT":
       return {};
     case "DELETE/SUBJECT":
-      return {};
+      return {
+        ...state,
+        subjects: state.subjects.filter(
+          (subject) => subject.id !== action.payload
+        ),
+      };
     case "Add/Task":
       return {};
     case "loading":
@@ -23,6 +28,8 @@ function reducer(state, action) {
   }
 }
 
+const ENDPOINT = "http://localhost:9000/subjects";
+
 const SubjectsContext = createContext(null);
 function SubjectsProvider({ children }) {
   const [{ subjects, status }, dispatch] = useReducer(reducer, {
@@ -30,8 +37,9 @@ function SubjectsProvider({ children }) {
     status: "idle",
   });
 
+  //? CREATE SUBJECTS
   async function addSubject(subject) {
-    const res = await fetch("http://localhost:9000/subjects", {
+    const res = await fetch(ENDPOINT, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -46,12 +54,12 @@ function SubjectsProvider({ children }) {
     dispatch({ type: "CREATE/SUBJECT", payload: data });
   }
 
-  //? FETCH SUBJECTS
+  //? READ SUBJECTS
   useEffect(() => {
     dispatch({ type: "loading" });
     async function fetchSubjects() {
       try {
-        const res = await fetch("http://localhost:9000/subjects", {
+        const res = await fetch(ENDPOINT, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -70,8 +78,17 @@ function SubjectsProvider({ children }) {
     fetchSubjects();
   }, []);
 
+  //? DELETE SUBJECT
+
+  async function deleteSubject(id) {
+    const res = await fetch(`${ENDPOINT}/${id}`, {
+      method: "DELETE",
+    });
+    dispatch({ type: "DELETE/SUBJECT", payload: id });
+  }
+
   return (
-    <SubjectsContext value={{ subjects, status, addSubject }}>
+    <SubjectsContext value={{ subjects, status, addSubject, deleteSubject }}>
       {children}
     </SubjectsContext>
   );
