@@ -15,6 +15,15 @@ function reducer(state, action) {
           (subject) => subject.id !== action.payload
         ),
       };
+    case "edit/title":
+      return {
+        ...state,
+        subjects: state.subjects.map((subject) =>
+          subject.id === action.payload.id
+            ? { ...subject, name: action.payload.newTitle }
+            : subject
+        ),
+      };
     case "Add/Task":
       return {};
     case "loading":
@@ -88,11 +97,18 @@ function SubjectsProvider({ children }) {
     const res = await fetch(`${ENDPOINT}/${id}`, {
       method: "DELETE",
     });
+
     dispatch({ type: "DELETE/SUBJECT", payload: id });
   }
 
+  //? Edit subject title
+  async function editSubjectTitle(id, newTitle) {
+    dispatch({ type: "edit/title", payload: { id, newTitle } });
+  }
   return (
-    <SubjectsContext value={{ subjects, status, addSubject, deleteSubject }}>
+    <SubjectsContext
+      value={{ subjects, status, addSubject, deleteSubject, editSubjectTitle }}
+    >
       {children}
     </SubjectsContext>
   );

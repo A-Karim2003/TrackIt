@@ -11,6 +11,7 @@ function Subject({
   const isEditing = isEditingId === subject.id;
 
   const [editedTitle, setEditedTitle] = useState(subject.name);
+
   return (
     <div
       className={`${className} cursor-pointer flex flex-col p-4 rounded-xl`}
