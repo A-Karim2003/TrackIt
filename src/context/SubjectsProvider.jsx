@@ -7,15 +7,6 @@ function reducer(state, action) {
     case "READ/SUBJECTS":
       return { ...state, subjects: action.payload };
     case "UPDATE/SUBJECT":
-      return {};
-    case "DELETE/SUBJECT":
-      return {
-        ...state,
-        subjects: state.subjects.filter(
-          (subject) => subject.id !== action.payload
-        ),
-      };
-    case "edit/title":
       return {
         ...state,
         subjects: state.subjects.map((subject) =>
@@ -24,8 +15,26 @@ function reducer(state, action) {
             : subject
         ),
       };
-    case "Add/Task":
-      return {};
+    case "DELETE/SUBJECT":
+      return {
+        ...state,
+        subjects: state.subjects.filter(
+          (subject) => subject.id !== action.payload
+        ),
+      };
+
+    case "ADD/TASK":
+      return {
+        ...state,
+        subjects: state.subjects.map((subject) =>
+          subject.id === action.payload.id
+            ? {
+                ...subject,
+                tasks: [...subject.tasks, action.payload.newTask],
+              }
+            : subject
+        ),
+      };
     case "loading":
       return { ...state, status: "loading" };
     case "success":
@@ -51,7 +60,7 @@ function SubjectsProvider({ children }) {
     const res = await fetch(ENDPOINT, {
       method: "POST",
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
       },
 
       body: JSON.stringify(subject),
@@ -87,22 +96,8 @@ function SubjectsProvider({ children }) {
     fetchSubjects();
   }, []);
 
-  //? UPDATE SUBJECTS
-  // async function updateSubject(id) {
-  //   const res
-  // }
-
-  //? DELETE SUBJECT
-  async function deleteSubject(id) {
-    const res = await fetch(`${ENDPOINT}/${id}`, {
-      method: "DELETE",
-    });
-
-    dispatch({ type: "DELETE/SUBJECT", payload: id });
-  }
-
-  //? Edit subject title
-  async function editSubjectTitle(id, newTitle) {
+  //? UPDATE SUBJECT
+  async function updateSubject(id, newTitle) {
     if (!newTitle.trim()) return;
 
     const res = await fetch(`${ENDPOINT}/${id}`, {
@@ -113,11 +108,52 @@ function SubjectsProvider({ children }) {
 
       body: JSON.stringify({ name: newTitle }),
     });
-    dispatch({ type: "edit/title", payload: { id, newTitle } });
+    dispatch({ type: "UPDATE/SUBJECT", payload: { id, newTitle } });
   }
+
+  //? DELETE SUBJECT
+  async function deleteSubject(id) {
+    const res = await fetch(`${ENDPOINT}/${id}`, {
+      method: "DELETE",
+    });
+
+    dispatch({ type: "DELETE/SUBJECT", payload: id });
+  }
+  /*=======================TASK SECTION=======================*/
+  //? CREATE TASK
+  async function createTask(id, newTask) {
+    //* gets the object that needs updating
+    const res = await fetch(`${ENDPOINT}/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const subject = await res.json();
+
+    //* Add new task into the object
+    await fetch(`${ENDPOINT}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({ tasks: [...subject.tasks, newTask] }),
+    });
+
+    dispatch({ type: "ADD/TASK", payload: { newTask, id } });
+  }
+
   return (
     <SubjectsContext
-      value={{ subjects, status, addSubject, deleteSubject, editSubjectTitle }}
+      value={{
+        subjects,
+        status,
+        addSubject,
+        deleteSubject,
+        updateSubject,
+        createTask,
+      }}
     >
       {children}
     </SubjectsContext>

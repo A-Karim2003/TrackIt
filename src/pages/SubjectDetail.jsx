@@ -6,6 +6,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import AddForm from "../components/AddForm";
 import SectionTitle from "../components/SectionTitle";
 import Task from "../components/Task";
+import AddTask from "../components/AddTask";
 
 function SubjectDetail() {
   const { id } = useParams();
@@ -36,10 +37,7 @@ function SubjectDetail() {
         </Subject>
       </Card>
 
-      <Card className="w-full flex flex-col">
-        <SectionTitle title="Add New Task" />
-        <AddForm placeholder={"Add new task"} />
-      </Card>
+      <AddTask />
 
       <Card className="w-full flex flex-col">
         <SectionTitle title="Tasks" />

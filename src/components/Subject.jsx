@@ -10,7 +10,7 @@ function Subject({
   onClick,
 }) {
   const [editedTitle, setEditedTitle] = useState(subject.name);
-  const { editSubjectTitle } = useSubjects();
+  const { updateSubject } = useSubjects();
 
   const isEditing = isEditingId === subject.id;
 
@@ -32,7 +32,7 @@ function Subject({
               onChange={(e) => setEditedTitle(e.target.value)}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  editSubjectTitle(subject.id, editedTitle);
+                  updateSubject(subject.id, editedTitle);
                   setIsEditingId(null);
                 }
 
@@ -43,7 +43,6 @@ function Subject({
             <h4>{subject?.name}</h4>
           )}
         </div>
-
         {children}
       </div>
       <div className="w-full h-2 bg-slate-200 mt-4 rounded-lg relative overflow-hidden">

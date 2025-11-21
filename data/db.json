@@ -2,7 +2,7 @@
   "subjects": [
     {
       "id": "1",
-      "name": "Math",
+      "name": "Maths",
       "tasks": [
         {
           "id": 1,
@@ -120,9 +120,30 @@
       ]
     },
     {
-      "id": "c6314a5a-6055-4dbd-9bf2-08bda89cf903",
-      "name": "wasdwasdwasd",
+      "id": "1f231df7-da6e-45be-8624-04479db8e717",
+      "name": "Data Science",
       "tasks": []
+    },
+    {
+      "id": "e6ae9fa2-c653-4897-9515-21f4d438e082",
+      "name": "test subject",
+      "tasks": [
+        {
+          "id": "c5c3ed5b-d51b-44a0-b14e-391ba82ede76",
+          "text": "test task 1",
+          "completed": false
+        },
+        {
+          "id": "5356ff1e-f5ae-48b7-8d0b-86d01503665e",
+          "text": "test task 2",
+          "completed": false
+        },
+        {
+          "id": "4d8974b5-0577-442c-a8d5-6c06b973acdb",
+          "text": "test task 3",
+          "completed": false
+        }
+      ]
     }
   ]
 }
