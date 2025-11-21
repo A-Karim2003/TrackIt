@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSubjects } from "../context/SubjectsProvider";
 
 function Subject({
   subject,
@@ -8,9 +9,10 @@ function Subject({
   className,
   onClick,
 }) {
-  const isEditing = isEditingId === subject.id;
-
   const [editedTitle, setEditedTitle] = useState(subject.name);
+  const { editSubjectTitle } = useSubjects();
+
+  const isEditing = isEditingId === subject.id;
 
   return (
     <div
@@ -28,6 +30,14 @@ function Subject({
               autoFocus
               onBlur={() => setIsEditingId(null)}
               onChange={(e) => setEditedTitle(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  editSubjectTitle(subject.id, editedTitle);
+                  setIsEditingId(null);
+                }
+
+                e.key === "Escape" && setIsEditingId(null);
+              }}
             />
           ) : (
             <h4>{subject?.name}</h4>

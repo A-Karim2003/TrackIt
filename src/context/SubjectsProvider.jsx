@@ -103,6 +103,16 @@ function SubjectsProvider({ children }) {
 
   //? Edit subject title
   async function editSubjectTitle(id, newTitle) {
+    if (!newTitle.trim()) return;
+
+    const res = await fetch(`${ENDPOINT}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({ name: newTitle }),
+    });
     dispatch({ type: "edit/title", payload: { id, newTitle } });
   }
   return (

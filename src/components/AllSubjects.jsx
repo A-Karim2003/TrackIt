@@ -10,7 +10,6 @@ function AllSubjects() {
   const navigate = useNavigate();
   const { subjects, deleteSubject } = useSubjects();
   const [isEditingId, setIsEditingId] = useState();
-  console.log(isEditingId);
 
   return (
     <Card className="flex flex-col gap-8">
