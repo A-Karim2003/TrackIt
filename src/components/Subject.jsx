@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSubjects } from "../context/SubjectsProvider";
+import EditItemInput from "./EditItemInput";
 
 function Subject({
   subject,
@@ -11,33 +12,32 @@ function Subject({
 }) {
   const [editedTitle, setEditedTitle] = useState(subject.name);
   const { updateSubject } = useSubjects();
-
   const isEditing = isEditingId === subject.id;
+
+  function onSubmit() {
+    console.log("submitted");
+    updateSubject(subject.id, editedTitle);
+    setIsEditingId(null);
+  }
+
+  function onCancel() {
+    setIsEditingId(null);
+  }
 
   return (
     <div
       className={`${className} cursor-pointer flex flex-col p-4 rounded-xl`}
       onClick={onClick}
     >
-      <div className="flex items-center gap-4 j">
+      <div className="flex items-center gap-4 ">
         <div className="h-[15px] w-[15px] bg-customGreen rounded-full"></div>
         <div onClick={(e) => e.stopPropagation()}>
           {isEditing ? (
-            <input
-              className="border border-customOrange rounded-xl py-1 px-2 outline-0"
-              type="text"
+            <EditItemInput
+              onChange={setEditedTitle}
               value={editedTitle}
-              autoFocus
-              onBlur={() => setIsEditingId(null)}
-              onChange={(e) => setEditedTitle(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  updateSubject(subject.id, editedTitle);
-                  setIsEditingId(null);
-                }
-
-                e.key === "Escape" && setIsEditingId(null);
-              }}
+              onSubmit={onSubmit}
+              onCancel={onCancel}
             />
           ) : (
             <h4>{subject?.name}</h4>

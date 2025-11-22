@@ -1,12 +1,7 @@
 import { useState } from "react";
-import { useSubjects } from "../context/SubjectsProvider";
-import { useParams } from "react-router-dom";
-import Actions from "./Actions";
 
-function Task({ task }) {
+function Task({ task, children }) {
   const [isChecked, setIsChecked] = useState(false);
-  const { deleteTask } = useSubjects();
-  const { id: subjectId } = useParams();
 
   return (
     <div
@@ -22,11 +17,7 @@ function Task({ task }) {
       <label htmlFor={task.id} className="italic">
         {task.text}
       </label>
-      <Actions
-        item={task}
-        deleteItem={() => deleteTask(subjectId, task.id)}
-        setIsEditingId={""}
-      />
+      {children}
     </div>
   );
 }
