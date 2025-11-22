@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 function AddTask() {
   const { createTask } = useSubjects();
   const { id } = useParams();
-  console.log();
 
   const [taskName, setTaskName] = useState("");
 

@@ -27,13 +27,28 @@ function reducer(state, action) {
       return {
         ...state,
         subjects: state.subjects.map((subject) =>
-          subject.id === action.payload.id
+          subject.id === action.payload.subjectId
             ? {
                 ...subject,
                 tasks: [...subject.tasks, action.payload.newTask],
               }
             : subject
         ),
+      };
+
+    case "DELETE/TASK":
+      return {
+        ...state,
+        subjects: state.subjects.map((subject) => {
+          return subject.id === action.payload.subjectId
+            ? {
+                ...subject,
+                tasks: subject.tasks.filter(
+                  (task) => task.id !== action.payload.taskId
+                ),
+              }
+            : subject;
+        }),
       };
     case "loading":
       return { ...state, status: "loading" };
@@ -67,7 +82,6 @@ function SubjectsProvider({ children }) {
     });
 
     const data = await res.json();
-    console.log(data);
 
     dispatch({ type: "CREATE/SUBJECT", payload: data });
   }
@@ -97,10 +111,10 @@ function SubjectsProvider({ children }) {
   }, []);
 
   //? UPDATE SUBJECT
-  async function updateSubject(id, newTitle) {
+  async function updateSubject(subjectId, newTitle) {
     if (!newTitle.trim()) return;
 
-    const res = await fetch(`${ENDPOINT}/${id}`, {
+    const res = await fetch(`${ENDPOINT}/${subjectId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -108,22 +122,22 @@ function SubjectsProvider({ children }) {
 
       body: JSON.stringify({ name: newTitle }),
     });
-    dispatch({ type: "UPDATE/SUBJECT", payload: { id, newTitle } });
+    dispatch({ type: "UPDATE/SUBJECT", payload: { subjectId, newTitle } });
   }
 
   //? DELETE SUBJECT
-  async function deleteSubject(id) {
-    const res = await fetch(`${ENDPOINT}/${id}`, {
+  async function deleteSubject(subjectId) {
+    const res = await fetch(`${ENDPOINT}/${subjectId}`, {
       method: "DELETE",
     });
 
-    dispatch({ type: "DELETE/SUBJECT", payload: id });
+    dispatch({ type: "DELETE/SUBJECT", payload: subjectId });
   }
   /*=======================TASK SECTION=======================*/
   //? CREATE TASK
-  async function createTask(id, newTask) {
+  async function createTask(subjectId, newTask) {
     //* gets the object that needs updating
-    const res = await fetch(`${ENDPOINT}/${id}`, {
+    const res = await fetch(`${ENDPOINT}/${subjectId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -132,7 +146,7 @@ function SubjectsProvider({ children }) {
     const subject = await res.json();
 
     //* Add new task into the object
-    await fetch(`${ENDPOINT}/${id}`, {
+    await fetch(`${ENDPOINT}/${subjectId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -141,7 +155,36 @@ function SubjectsProvider({ children }) {
       body: JSON.stringify({ tasks: [...subject.tasks, newTask] }),
     });
 
-    dispatch({ type: "ADD/TASK", payload: { newTask, id } });
+    dispatch({ type: "ADD/TASK", payload: { newTask, subjectId } });
+  }
+
+  //? DELETE TASK
+  async function deleteTask(subjectId, taskId) {
+    const res = await fetch(`${ENDPOINT}/${subjectId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    //* return subject which needs task deletion
+    const subject = await res.json();
+
+    //* replace existing tasks array with new filtered tasks
+    const newTasks = subject.tasks.filter((task) => task.id !== taskId);
+
+    await fetch(`${ENDPOINT}/${subjectId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ tasks: newTasks }),
+    });
+
+    dispatch({
+      type: "DELETE/TASK",
+      payload: { subjectId, taskId },
+    });
   }
 
   return (
@@ -153,6 +196,7 @@ function SubjectsProvider({ children }) {
         deleteSubject,
         updateSubject,
         createTask,
+        deleteTask,
       }}
     >
       {children}

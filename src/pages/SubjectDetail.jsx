@@ -3,10 +3,9 @@ import { useSubjects } from "../context/SubjectsProvider";
 import Card from "../components/Card";
 import Subject from "../components/Subject";
 import LoadingSpinner from "../components/LoadingSpinner";
-import AddForm from "../components/AddForm";
 import SectionTitle from "../components/SectionTitle";
 import Task from "../components/Task";
-import AddTask from "../components/AddTask";
+import AddTask from "../components/addTask";
 
 function SubjectDetail() {
   const { id } = useParams();
@@ -42,7 +41,7 @@ function SubjectDetail() {
       <Card className="w-full flex flex-col">
         <SectionTitle title="Tasks" />
         {subject.tasks.map((task) => {
-          return <Task key={task.id} id={task.id} taskName={task.text} />;
+          return <Task key={task.id} task={task} />;
         })}
       </Card>
     </div>
