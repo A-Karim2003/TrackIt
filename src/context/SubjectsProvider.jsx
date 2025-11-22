@@ -10,7 +10,7 @@ function reducer(state, action) {
       return {
         ...state,
         subjects: state.subjects.map((subject) =>
-          subject.id === action.payload.id
+          subject.id === action.payload.subjectId
             ? { ...subject, name: action.payload.newTitle }
             : subject
         ),
@@ -22,7 +22,6 @@ function reducer(state, action) {
           (subject) => subject.id !== action.payload
         ),
       };
-
     case "ADD/TASK":
       return {
         ...state,
@@ -35,7 +34,22 @@ function reducer(state, action) {
             : subject
         ),
       };
-
+    case "UPDATE/TASK":
+      return {
+        ...state,
+        subjects: state.subjects.map((subject) => {
+          return subject.id === action.payload.subjectId
+            ? {
+                ...subject,
+                tasks: subject.tasks.map((task) =>
+                  task.id === action.payload.taskId
+                    ? { ...task, text: action.payload.text }
+                    : task
+                ),
+              }
+            : subject;
+        }),
+      };
     case "DELETE/TASK":
       return {
         ...state,
@@ -82,7 +96,6 @@ function SubjectsProvider({ children }) {
     });
 
     const data = await res.json();
-
     dispatch({ type: "CREATE/SUBJECT", payload: data });
   }
 

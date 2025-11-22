@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { RiDeleteBin5Line } from "react-icons/ri";
 import { useSubjects } from "../context/SubjectsProvider";
 import { useParams } from "react-router-dom";
+import Actions from "./Actions";
 
 function Task({ task }) {
   const [isChecked, setIsChecked] = useState(false);
@@ -19,14 +19,13 @@ function Task({ task }) {
         onChange={(e) => setIsChecked(e.target.checked)}
         checked={isChecked}
       />
-
       <label htmlFor={task.id} className="italic">
         {task.text}
       </label>
-
-      <RiDeleteBin5Line
-        className="ml-auto text-customRed h-5 w-5 cursor-pointer hover:scale-120 transition duration-300"
-        onClick={() => deleteTask(subjectId, task.id)}
+      <Actions
+        item={task}
+        deleteItem={() => deleteTask(subjectId, task.id)}
+        setIsEditingId={""}
       />
     </div>
   );

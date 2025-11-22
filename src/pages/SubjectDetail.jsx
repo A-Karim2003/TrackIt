@@ -6,6 +6,7 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import SectionTitle from "../components/SectionTitle";
 import Task from "../components/Task";
 import AddTask from "../components/addTask";
+import Tasks from "../components/Tasks";
 
 function SubjectDetail() {
   const { id } = useParams();
@@ -27,6 +28,7 @@ function SubjectDetail() {
           &larr; Back to Subjects
         </small>
       </div>
+
       <Card>
         <Subject subject={subject} className="w-full text-xl">
           <small className="text-customGrey ">
@@ -37,13 +39,7 @@ function SubjectDetail() {
       </Card>
 
       <AddTask />
-
-      <Card className="w-full flex flex-col">
-        <SectionTitle title="Tasks" />
-        {subject.tasks.map((task) => {
-          return <Task key={task.id} task={task} />;
-        })}
-      </Card>
+      <Tasks subject={subject} />
     </div>
   );
 }

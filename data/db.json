@@ -146,7 +146,7 @@
     },
     {
       "id": "e6ae9fa2-c653-4897-9515-21f4d438e082",
-      "name": "test subject",
+      "name": "test subject 1",
       "tasks": [
         {
           "id": "c5c3ed5b-d51b-44a0-b14e-391ba82ede76",
@@ -156,6 +156,11 @@
         {
           "id": "d27f6f22-2b08-429f-9c7a-8967c8bf73cd",
           "text": "test task 2",
+          "completed": false
+        },
+        {
+          "id": "342844b5-8219-4957-96c2-2c9903c2a79c",
+          "text": "test task 3",
           "completed": false
         }
       ]

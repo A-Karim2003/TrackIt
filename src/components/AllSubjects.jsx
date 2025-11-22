@@ -29,9 +29,9 @@ function AllSubjects() {
               {`0/${subject.tasks.length}`} tasks completed
             </small>
             <Actions
-              subject={subject}
-              deleteSubject={deleteSubject}
-              setIsEditingId={setIsEditingId}
+              item={subject}
+              deleteItem={() => deleteSubject(subject.id)}
+              setIsEditingId={() => setIsEditingId(subject.id)}
             />
           </Subject>
         ))}
