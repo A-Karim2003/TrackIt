@@ -15,7 +15,8 @@ function Subject({
   const isEditing = isEditingId === subject.id;
 
   function onSubmit() {
-    console.log("submitted");
+    if (!editedTitle.trim()) return;
+
     updateSubject(subject.id, editedTitle);
     setIsEditingId(null);
   }

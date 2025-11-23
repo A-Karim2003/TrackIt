@@ -11,13 +11,16 @@ function Tasks({ subject }) {
   const { id: subjectId } = useParams();
   const [isEditingId, setIsEditingId] = useState();
 
-  console.log(isEditingId);
-
   return (
     <Card className="w-full flex flex-col">
       <SectionTitle title="Tasks" />
       {subject.tasks.map((task) => (
-        <Task key={task.id} task={task}>
+        <Task
+          key={task.id}
+          task={task}
+          isEditingId={isEditingId}
+          setIsEditingId={setIsEditingId}
+        >
           <Actions
             item={task}
             deleteItem={() => deleteTask(subjectId, task.id)}

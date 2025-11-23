@@ -43,7 +43,7 @@ function reducer(state, action) {
                 ...subject,
                 tasks: subject.tasks.map((task) =>
                   task.id === action.payload.taskId
-                    ? { ...task, text: action.payload.text }
+                    ? { ...task, text: action.payload.newText }
                     : task
                 ),
               }
@@ -125,8 +125,6 @@ function SubjectsProvider({ children }) {
 
   //? UPDATE SUBJECT
   async function updateSubject(subjectId, newTitle) {
-    if (!newTitle.trim()) return;
-
     const res = await fetch(`${ENDPOINT}/${subjectId}`, {
       method: "PATCH",
       headers: {
@@ -171,6 +169,39 @@ function SubjectsProvider({ children }) {
     dispatch({ type: "ADD/TASK", payload: { newTask, subjectId } });
   }
 
+  //? UPDATE TASK
+  async function updateTask(subjectId, taskId, newText) {
+    const res = await fetch(`${ENDPOINT}/${subjectId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const subject = await res.json();
+
+    const newtasks = subject.tasks.map((task) =>
+      task.id === taskId ? { ...task, text: newText } : subject
+    );
+
+    await fetch(`${ENDPOINT}/${subjectId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ tasks: newtasks }),
+    });
+
+    dispatch({
+      type: "UPDATE/TASK",
+      payload: {
+        subjectId,
+        taskId,
+        newText,
+      },
+    });
+  }
+
   //? DELETE TASK
   async function deleteTask(subjectId, taskId) {
     const res = await fetch(`${ENDPOINT}/${subjectId}`, {
@@ -209,6 +240,7 @@ function SubjectsProvider({ children }) {
         deleteSubject,
         updateSubject,
         createTask,
+        updateTask,
         deleteTask,
       }}
     >
