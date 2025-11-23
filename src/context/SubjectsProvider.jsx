@@ -86,17 +86,24 @@ function SubjectsProvider({ children }) {
 
   //? CREATE SUBJECTS
   async function addSubject(subject) {
-    const res = await fetch(ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-      body: JSON.stringify(subject),
-    });
+        body: JSON.stringify(subject),
+      });
 
-    const data = await res.json();
-    dispatch({ type: "CREATE/SUBJECT", payload: data });
+      if (!res.ok)
+        throw new Error("Failed to create subject. Please try again.");
+
+      const data = await res.json();
+      dispatch({ type: "CREATE/SUBJECT", payload: data });
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   //? READ SUBJECTS
@@ -125,110 +132,159 @@ function SubjectsProvider({ children }) {
 
   //? UPDATE SUBJECT
   async function updateSubject(subjectId, newTitle) {
-    const res = await fetch(`${ENDPOINT}/${subjectId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    try {
+      const res = await fetch(`${ENDPOINT}/${subjectId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-      body: JSON.stringify({ name: newTitle }),
-    });
-    dispatch({ type: "UPDATE/SUBJECT", payload: { subjectId, newTitle } });
+        body: JSON.stringify({ name: newTitle }),
+      });
+
+      if (!res.ok)
+        throw new Error("Failed to update subject. Please try again.");
+
+      dispatch({ type: "UPDATE/SUBJECT", payload: { subjectId, newTitle } });
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   //? DELETE SUBJECT
   async function deleteSubject(subjectId) {
-    const res = await fetch(`${ENDPOINT}/${subjectId}`, {
-      method: "DELETE",
-    });
+    try {
+      const res = await fetch(`${ENDPOINT}/${subjectId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok)
+        throw new Error("Failed to delete subject. Please try again.");
 
-    dispatch({ type: "DELETE/SUBJECT", payload: subjectId });
+      dispatch({ type: "DELETE/SUBJECT", payload: subjectId });
+    } catch (error) {
+      console.log(error.message);
+    }
   }
-  /*=======================TASK SECTION=======================*/
+  /*=======================TASKS SECTION=======================*/
   //? CREATE TASK
   async function createTask(subjectId, newTask) {
     //* gets the object that needs updating
-    const res = await fetch(`${ENDPOINT}/${subjectId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const subject = await res.json();
+    try {
+      const res = await fetch(`${ENDPOINT}/${subjectId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    //* Add new task into the object
-    await fetch(`${ENDPOINT}/${subjectId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      if (!res.ok)
+        throw new Error("Unable to load subject details. Please try again.");
 
-      body: JSON.stringify({ tasks: [...subject.tasks, newTask] }),
-    });
+      const subject = await res.json();
 
-    dispatch({ type: "ADD/TASK", payload: { newTask, subjectId } });
+      //* Add new task into the object
+      const patchRes = await fetch(`${ENDPOINT}/${subjectId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({ tasks: [...subject.tasks, newTask] }),
+      });
+
+      if (!patchRes.ok)
+        throw new Error("Could not save task. Try again in a moment.");
+
+      dispatch({ type: "ADD/TASK", payload: { newTask, subjectId } });
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   //? UPDATE TASK
   async function updateTask(subjectId, taskId, newText) {
-    const res = await fetch(`${ENDPOINT}/${subjectId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const res = await fetch(`${ENDPOINT}/${subjectId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    const subject = await res.json();
+      if (!res.ok)
+        throw new Error(
+          "Could not load task data. Please refresh and try again."
+        );
 
-    const newtasks = subject.tasks.map((task) =>
-      task.id === taskId ? { ...task, text: newText } : subject
-    );
+      const subject = await res.json();
 
-    await fetch(`${ENDPOINT}/${subjectId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ tasks: newtasks }),
-    });
+      const newtasks = subject.tasks.map((task) =>
+        task.id === taskId ? { ...task, text: newText } : task
+      );
 
-    dispatch({
-      type: "UPDATE/TASK",
-      payload: {
-        subjectId,
-        taskId,
-        newText,
-      },
-    });
+      const patchRes = await fetch(`${ENDPOINT}/${subjectId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tasks: newtasks }),
+      });
+
+      if (!patchRes.ok)
+        throw new Error(
+          "Failed to update task. Something went wrong saving changes."
+        );
+
+      dispatch({
+        type: "UPDATE/TASK",
+        payload: {
+          subjectId,
+          taskId,
+          newText,
+        },
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   //? DELETE TASK
   async function deleteTask(subjectId, taskId) {
-    const res = await fetch(`${ENDPOINT}/${subjectId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    try {
+      const res = await fetch(`${ENDPOINT}/${subjectId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-    //* return subject which needs task deletion
-    const subject = await res.json();
+      if (!res.ok)
+        throw new Error("Could not retrieve task list. Refresh and try again.");
 
-    //* replace existing tasks array with new filtered tasks
-    const newTasks = subject.tasks.filter((task) => task.id !== taskId);
+      //* return subject which needs task deletion
+      const subject = await res.json();
 
-    await fetch(`${ENDPOINT}/${subjectId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ tasks: newTasks }),
-    });
+      //* replace existing tasks array with new filtered tasks
+      const newTasks = subject.tasks.filter((task) => task.id !== taskId);
 
-    dispatch({
-      type: "DELETE/TASK",
-      payload: { subjectId, taskId },
-    });
+      await fetch(`${ENDPOINT}/${subjectId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ tasks: newTasks }),
+      });
+
+      if (!res.ok)
+        throw new Error("Failed to delete task. Please try again later.");
+
+      dispatch({
+        type: "DELETE/TASK",
+        payload: { subjectId, taskId },
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
   return (
