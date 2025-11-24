@@ -4,6 +4,7 @@ import EditItemInput from "./EditItemInput";
 
 function Subject({
   subject,
+  completedPercentage,
   setIsEditingId,
   isEditingId,
   children,
@@ -47,7 +48,10 @@ function Subject({
         {children}
       </div>
       <div className="w-full h-2 bg-slate-200 mt-4 rounded-lg relative overflow-hidden">
-        <div className="absolute left-0 bg-customGreen h-full w-[50%]"></div>
+        <div
+          className={`absolute left-0 bg-customGreen h-full duration-1000`}
+          style={{ width: `${completedPercentage}%` }}
+        ></div>
       </div>
     </div>
   );

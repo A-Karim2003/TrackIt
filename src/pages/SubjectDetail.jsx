@@ -3,10 +3,9 @@ import { useSubjects } from "../context/SubjectsProvider";
 import Card from "../components/Card";
 import Subject from "../components/Subject";
 import LoadingSpinner from "../components/LoadingSpinner";
-import SectionTitle from "../components/SectionTitle";
-import Task from "../components/Task";
-import AddTask from "../components/addTask";
 import Tasks from "../components/Tasks";
+import AddTask from "../components/AddTask";
+import getSubjectStats from "../helpers/getSubjectStats";
 
 function SubjectDetail() {
   const { id } = useParams();
@@ -17,6 +16,8 @@ function SubjectDetail() {
 
   //* Gets the current subject
   const subject = subjects.find((subject) => subject.id === id);
+
+  const { completedCount, completedPercentage } = getSubjectStats(subject);
 
   return (
     <div className="flex flex-col gap-8">
@@ -30,11 +31,15 @@ function SubjectDetail() {
       </div>
 
       <Card>
-        <Subject subject={subject} className="w-full text-xl">
+        <Subject
+          subject={subject}
+          className="w-full text-xl"
+          completedPercentage={completedPercentage}
+        >
           <small className="text-customGrey ">
-            {`1  of ${subject.tasks.length}`} tasks completed
+            {`${completedCount}  of ${subject.tasks.length}`} tasks completed
           </small>
-          <strong className=" ml-auto">50%</strong>
+          <strong className=" ml-auto">{completedPercentage}%</strong>
         </Subject>
       </Card>
 

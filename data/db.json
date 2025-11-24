@@ -7,7 +7,7 @@
         {
           "id": 1,
           "text": "Review integration techniques",
-          "completed": false
+          "completed": true
         },
         {
           "id": 2,
@@ -17,12 +17,12 @@
         {
           "id": 3,
           "text": "Understand eigenvalues and eigenvectors",
-          "completed": false
+          "completed": true
         },
         {
           "id": 4,
           "text": "Solve 5 problems on probability distributions",
-          "completed": false
+          "completed": true
         }
       ]
     },
@@ -33,7 +33,7 @@
         {
           "id": 1,
           "text": "Study Newton's laws of motion",
-          "completed": true
+          "completed": false
         },
         {
           "id": 2,
@@ -77,6 +77,27 @@
       "id": "1f231df7-da6e-45be-8624-04479db8e717",
       "name": "Data Science",
       "tasks": []
+    },
+    {
+      "id": "d26c6fd4-e799-4c36-8107-f30d8c86d2b3",
+      "name": "Subject Test",
+      "tasks": [
+        {
+          "id": "a1773c49-e252-4b79-8a7f-15dab05327f4",
+          "text": "Task 1",
+          "completed": true
+        },
+        {
+          "id": "a3f8ee44-4403-4998-b65e-c506d3f2cace",
+          "text": "Task 2",
+          "completed": true
+        },
+        {
+          "id": "e714d5b5-c1d1-4e50-8be0-bb20a2b94ea9",
+          "text": "Task 3",
+          "completed": false
+        }
+      ]
     }
   ]
 }

@@ -6,13 +6,13 @@ import { useParams } from "react-router-dom";
 function Task({ task, isEditingId, children, setIsEditingId }) {
   const { updateTask } = useSubjects();
   const { id: subjectId } = useParams();
-  const [isChecked, setIsChecked] = useState(false);
   const [editedTaskText, setEditedTaskText] = useState(task.text);
   const isEditing = isEditingId === task.id;
 
   function onSubmit() {
     if (!editedTaskText.trim()) return;
-    updateTask(subjectId, task.id, editedTaskText);
+    const updatedTask = { text: editedTaskText };
+    updateTask(subjectId, task.id, updatedTask);
     setIsEditingId(null);
   }
   function onCancel() {
@@ -27,8 +27,10 @@ function Task({ task, isEditingId, children, setIsEditingId }) {
         type="checkbox"
         id={task.id}
         className="w-5 h-5 accent-green-200"
-        onChange={(e) => setIsChecked(e.target.checked)}
-        checked={isChecked}
+        onChange={(e) =>
+          updateTask(subjectId, task.id, { completed: e.target.checked })
+        }
+        checked={task.completed}
       />
 
       {isEditing && (

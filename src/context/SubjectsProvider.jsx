@@ -44,7 +44,7 @@ function reducer(state, action) {
                 ...subject,
                 tasks: subject.tasks.map((task) =>
                   task.id === action.payload.taskId
-                    ? { ...task, text: action.payload.newText }
+                    ? { ...task, ...action.payload.updatedTask }
                     : task
                 ),
               }
@@ -222,9 +222,7 @@ function SubjectsProvider({ children }) {
   }
 
   //? UPDATE TASK
-  async function updateTask(subjectId, taskId, newText) {
-    dispatch({ type: "loading" });
-
+  async function updateTask(subjectId, taskId, updatedTask) {
     try {
       const res = await fetch(`${ENDPOINT}/${subjectId}`, {
         method: "GET",
@@ -241,7 +239,7 @@ function SubjectsProvider({ children }) {
       const subject = await res.json();
 
       const newtasks = subject.tasks.map((task) =>
-        task.id === taskId ? { ...task, text: newText } : task
+        task.id === taskId ? { ...task, ...updatedTask } : task
       );
 
       const patchRes = await fetch(`${ENDPOINT}/${subjectId}`, {
@@ -262,10 +260,14 @@ function SubjectsProvider({ children }) {
         payload: {
           subjectId,
           taskId,
-          newText,
+          updatedTask,
         },
       });
-      toast.success("Task updated");
+
+      dispatch({ type: "success" });
+
+      if (!Object.keys(updatedTask).includes("completed"))
+        toast.success("Task updated");
     } catch (error) {
       dispatch({ type: "error" });
       console.error(error.message);
@@ -305,6 +307,7 @@ function SubjectsProvider({ children }) {
         throw new Error("Failed to delete task. Please try again later.");
 
       dispatch({ type: "DELETE/TASK", payload: { subjectId, taskId } });
+
       toast.success("Task deleted");
     } catch (error) {
       dispatch({ type: "error" });
