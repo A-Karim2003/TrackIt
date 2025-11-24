@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { toast } from "react-toastify";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -101,8 +102,10 @@ function SubjectsProvider({ children }) {
 
       const data = await res.json();
       dispatch({ type: "CREATE/SUBJECT", payload: data });
+      toast.success("Subject created");
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
+      dispatch({ type: "error" });
     }
   }
 
@@ -118,6 +121,8 @@ function SubjectsProvider({ children }) {
           },
         });
 
+        if (!res.ok) throw new Error("Failed to fetch subject");
+
         const subjects = await res.json();
         dispatch({ type: "READ/SUBJECTS", payload: subjects });
         dispatch({ type: "success" });
@@ -132,6 +137,8 @@ function SubjectsProvider({ children }) {
 
   //? UPDATE SUBJECT
   async function updateSubject(subjectId, newTitle) {
+    dispatch({ type: "loading" });
+
     try {
       const res = await fetch(`${ENDPOINT}/${subjectId}`, {
         method: "PATCH",
@@ -146,13 +153,18 @@ function SubjectsProvider({ children }) {
         throw new Error("Failed to update subject. Please try again.");
 
       dispatch({ type: "UPDATE/SUBJECT", payload: { subjectId, newTitle } });
+      dispatch({ type: "success" });
+      toast.success("Subject updated!");
     } catch (error) {
-      console.log(error.message);
+      dispatch({ type: "error" });
+      console.error(error.message);
     }
   }
 
   //? DELETE SUBJECT
   async function deleteSubject(subjectId) {
+    dispatch({ type: "loading" });
+
     try {
       const res = await fetch(`${ENDPOINT}/${subjectId}`, {
         method: "DELETE",
@@ -161,13 +173,18 @@ function SubjectsProvider({ children }) {
         throw new Error("Failed to delete subject. Please try again.");
 
       dispatch({ type: "DELETE/SUBJECT", payload: subjectId });
+      dispatch({ type: "success" });
+      toast.success("Subject deleted");
     } catch (error) {
-      console.log(error.message);
+      dispatch({ type: "error" });
+      console.error(error.message);
     }
   }
   /*=======================TASKS SECTION=======================*/
   //? CREATE TASK
   async function createTask(subjectId, newTask) {
+    dispatch({ type: "loading" });
+
     //* gets the object that needs updating
     try {
       const res = await fetch(`${ENDPOINT}/${subjectId}`, {
@@ -196,13 +213,18 @@ function SubjectsProvider({ children }) {
         throw new Error("Could not save task. Try again in a moment.");
 
       dispatch({ type: "ADD/TASK", payload: { newTask, subjectId } });
+      dispatch({ type: "success" });
+      toast.success("Task created");
     } catch (error) {
-      console.log(error.message);
+      dispatch({ type: "error" });
+      console.error(error.message);
     }
   }
 
   //? UPDATE TASK
   async function updateTask(subjectId, taskId, newText) {
+    dispatch({ type: "loading" });
+
     try {
       const res = await fetch(`${ENDPOINT}/${subjectId}`, {
         method: "GET",
@@ -243,13 +265,17 @@ function SubjectsProvider({ children }) {
           newText,
         },
       });
+      toast.success("Task updated");
     } catch (error) {
-      console.log(error.message);
+      dispatch({ type: "error" });
+      console.error(error.message);
     }
   }
 
   //? DELETE TASK
   async function deleteTask(subjectId, taskId) {
+    dispatch({ type: "loading" });
+
     try {
       const res = await fetch(`${ENDPOINT}/${subjectId}`, {
         method: "GET",
@@ -278,12 +304,11 @@ function SubjectsProvider({ children }) {
       if (!res.ok)
         throw new Error("Failed to delete task. Please try again later.");
 
-      dispatch({
-        type: "DELETE/TASK",
-        payload: { subjectId, taskId },
-      });
+      dispatch({ type: "DELETE/TASK", payload: { subjectId, taskId } });
+      toast.success("Task deleted");
     } catch (error) {
-      console.log(error.message);
+      dispatch({ type: "error" });
+      console.error(error.message);
     }
   }
 

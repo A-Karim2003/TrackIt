@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Logo from "./components/AppLayout/Logo";
 import NavLinks from "./components/AppLayout/NavLinks";
+import { ToastContainer } from "react-toastify";
 
 function AppLayout() {
   return (
@@ -16,6 +17,7 @@ function AppLayout() {
       <main className="bg-gray-100 p-8 flex-1">
         <div className="max-w-[1440px] mx-auto">
           <Outlet />
+          <ToastContainer position="bottom-right" autoClose={3000} />
         </div>
       </main>
     </div>
