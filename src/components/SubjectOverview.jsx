@@ -5,11 +5,10 @@ import SectionTitle from "./SectionTitle";
 import Subject from "./Subject";
 import getSubjectStats from "../helpers/getSubjectStats";
 
-const randomColorMap = {};
-
 function SubjectOverview() {
   const navigate = useNavigate();
   const { subjects } = useSubjects();
+
   return (
     <Card className="flex-col">
       <div className="flex items-center justify-between w-full mb-4">
@@ -32,7 +31,6 @@ function SubjectOverview() {
                 subject={subject}
                 completedPercentage={completedPercentage}
                 className=" hover:bg-gray-100"
-                randomColor={""}
                 onClick={() => navigate(`/subjects/${subject.id}`)}
               >
                 <small className="text-[14px] text-customGrey">

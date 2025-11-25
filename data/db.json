@@ -3,6 +3,7 @@
     {
       "id": "1",
       "name": "Maths",
+      "themeColor": "#44c1b3",
       "tasks": [
         {
           "id": 1,
@@ -29,6 +30,7 @@
     {
       "id": "2",
       "name": "Physics",
+      "themeColor": "#fe914e",
       "tasks": [
         {
           "id": 1,
@@ -55,6 +57,7 @@
     {
       "id": "4",
       "name": "Literature",
+      "themeColor": "#c7293b",
       "tasks": [
         {
           "id": 1,
@@ -74,13 +77,9 @@
       ]
     },
     {
-      "id": "1f231df7-da6e-45be-8624-04479db8e717",
-      "name": "Data Science",
-      "tasks": []
-    },
-    {
       "id": "d26c6fd4-e799-4c36-8107-f30d8c86d2b3",
       "name": "Subject test",
+      "themeColor": "#fe914e",
       "tasks": [
         {
           "id": "a1773c49-e252-4b79-8a7f-15dab05327f4",
@@ -89,7 +88,7 @@
         },
         {
           "id": "a3f8ee44-4403-4998-b65e-c506d3f2cace",
-          "text": "Task 2",
+          "text": "Task 2B",
           "completed": true
         }
       ]

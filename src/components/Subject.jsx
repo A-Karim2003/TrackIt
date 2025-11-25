@@ -32,7 +32,10 @@ function Subject({
       onClick={onClick}
     >
       <div className="flex items-center gap-4 ">
-        <div className="h-[15px] w-[15px] bg-customGreen rounded-full"></div>
+        <div
+          className="h-[15px] w-[15px] rounded-full"
+          style={{ background: subject.themeColor }}
+        ></div>
         <div onClick={(e) => e.stopPropagation()}>
           {isEditing ? (
             <EditItemInput
@@ -49,8 +52,11 @@ function Subject({
       </div>
       <div className="w-full h-2 bg-slate-200 mt-4 rounded-lg relative overflow-hidden">
         <div
-          className={`absolute left-0 bg-customGreen h-full duration-1000`}
-          style={{ width: `${completedPercentage}%` }}
+          className={`absolute left-0 h-full duration-1000`}
+          style={{
+            width: `${completedPercentage}%`,
+            background: subject.themeColor,
+          }}
         ></div>
       </div>
     </div>
