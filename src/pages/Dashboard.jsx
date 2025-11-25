@@ -18,6 +18,16 @@ function Dashboard() {
     }, []);
   }, [subjects]);
 
+  //* return number of completed tasks
+  const numOfCompleted = allTasks.reduce(
+    (acc, task) => acc + (task.completed ? 1 : 0),
+    0
+  );
+
+  const percentOfComplete = allTasks.length
+    ? Math.round((numOfCompleted / allTasks.length) * 100)
+    : 0;
+
   if (status === "loading") return <LoadingSpinner />;
 
   return (
@@ -31,13 +41,13 @@ function Dashboard() {
       <DashboardInfo
         icon={<LuCircleCheckBig className="h-10 w-10" />}
         title={"Completed Tasks"}
-        quantity={`2/${allTasks.length}`}
+        quantity={`${numOfCompleted}/${allTasks.length}`}
         bgColor={"bg-bgCustomOrange"}
       />
       <DashboardInfo
         icon={<MdTrendingUp className="h-10 w-10" />}
         title={"Overall Progress"}
-        quantity={`40%`}
+        quantity={`${percentOfComplete}%`}
         bgColor={"bg-bgCustomRed"}
       />
 

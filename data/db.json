@@ -17,12 +17,12 @@
         {
           "id": 3,
           "text": "Understand eigenvalues and eigenvectors",
-          "completed": true
+          "completed": false
         },
         {
           "id": 4,
           "text": "Solve 5 problems on probability distributions",
-          "completed": true
+          "completed": false
         }
       ]
     },
@@ -33,7 +33,7 @@
         {
           "id": 1,
           "text": "Study Newton's laws of motion",
-          "completed": false
+          "completed": true
         },
         {
           "id": 2,
@@ -93,7 +93,7 @@
           "completed": true
         },
         {
-          "id": "e714d5b5-c1d1-4e50-8be0-bb20a2b94ea9",
+          "id": "e289d4f5-e99e-4320-976b-eb1246bc98fb",
           "text": "Task 3",
           "completed": false
         }

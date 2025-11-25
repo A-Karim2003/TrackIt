@@ -17,7 +17,7 @@ function AppLayout() {
       <main className="bg-gray-100 p-8 flex-1">
         <div className="max-w-[1440px] mx-auto">
           <Outlet />
-          <ToastContainer position="bottom-right" autoClose={3000} />
+          <ToastContainer position="bottom-right" autoClose={2000} />
         </div>
       </main>
     </div>

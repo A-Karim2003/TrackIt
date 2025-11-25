@@ -79,6 +79,7 @@ function reducer(state, action) {
 const ENDPOINT = "http://localhost:9000/subjects";
 
 const SubjectsContext = createContext(null);
+
 function SubjectsProvider({ children }) {
   const [{ subjects, status }, dispatch] = useReducer(reducer, {
     subjects: [],
@@ -183,8 +184,6 @@ function SubjectsProvider({ children }) {
   /*=======================TASKS SECTION=======================*/
   //? CREATE TASK
   async function createTask(subjectId, newTask) {
-    dispatch({ type: "loading" });
-
     //* gets the object that needs updating
     try {
       const res = await fetch(`${ENDPOINT}/${subjectId}`, {
@@ -276,8 +275,6 @@ function SubjectsProvider({ children }) {
 
   //? DELETE TASK
   async function deleteTask(subjectId, taskId) {
-    dispatch({ type: "loading" });
-
     try {
       const res = await fetch(`${ENDPOINT}/${subjectId}`, {
         method: "GET",

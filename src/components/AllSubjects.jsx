@@ -18,7 +18,8 @@ function AllSubjects() {
 
       <div className="flex flex-col gap-8 ">
         {subjects.map((subject) => {
-          const { completedPercentage } = getSubjectStats(subject);
+          const { completedPercentage, completedCount } =
+            getSubjectStats(subject);
 
           return (
             <Subject
@@ -31,7 +32,9 @@ function AllSubjects() {
               completedPercentage={completedPercentage}
             >
               <small className="text-[14px] text-customGrey">
-                {`0/${subject.tasks.length}`} tasks completed
+                {completedCount} /{" "}
+                <span className="font-bold">{subject.tasks.length} </span>tasks
+                completed
               </small>
               <Actions
                 item={subject}
