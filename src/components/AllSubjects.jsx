@@ -25,7 +25,7 @@ function AllSubjects() {
             <Subject
               key={subject.id}
               subject={subject}
-              className="border border-slate-300 "
+              className="border border-slate-300 hover:bg-gray-100 cursor-pointer"
               onClick={() => navigate(`/subjects/${subject.id}`)}
               isEditingId={isEditingId}
               setIsEditingId={setIsEditingId}

@@ -30,7 +30,7 @@ function SubjectOverview() {
                 key={subject.id}
                 subject={subject}
                 completedPercentage={completedPercentage}
-                className=" hover:bg-gray-100"
+                className="hover:bg-gray-100 cursor-pointer"
                 onClick={() => navigate(`/subjects/${subject.id}`)}
               >
                 <small className="text-[14px] text-customGrey">

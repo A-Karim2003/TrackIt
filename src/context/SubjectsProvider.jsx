@@ -168,8 +168,6 @@ function SubjectsProvider({ children }) {
 
   //? DELETE SUBJECT
   async function deleteSubject(subjectId) {
-    dispatch({ type: "loading" });
-
     try {
       const res = await fetch(`${ENDPOINT}/${subjectId}`, {
         method: "DELETE",

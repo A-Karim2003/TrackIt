@@ -90,6 +90,11 @@
           "id": "a3f8ee44-4403-4998-b65e-c506d3f2cace",
           "text": "Task 2B",
           "completed": true
+        },
+        {
+          "id": "08daff8e-2173-4653-860d-21dbc39080c7",
+          "text": "Task 3",
+          "completed": false
         }
       ]
     }

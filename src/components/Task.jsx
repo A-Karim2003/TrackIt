@@ -21,7 +21,9 @@ function Task({ task, isEditingId, children, setIsEditingId }) {
 
   return (
     <div
-      className={`cursor-pointer flex p-4 rounded-xl border border-slate-300 items-center justify-center gap-4`}
+      className={`cursor-pointer flex p-4 rounded-xl border border-slate-300 items-center justify-center gap-4 ${
+        task.completed ? "bg-green-100" : ""
+      } `}
     >
       <input
         type="checkbox"

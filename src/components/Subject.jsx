@@ -28,10 +28,10 @@ function Subject({
 
   return (
     <div
-      className={`${className} cursor-pointer flex flex-col p-4 rounded-xl`}
+      className={`${className} flex flex-col p-4 rounded-xl`}
       onClick={onClick}
     >
-      <div className="flex items-center gap-4 ">
+      <div className="flex items-center gap-4">
         <div
           className="h-[15px] w-[15px] rounded-full"
           style={{ background: subject.themeColor }}

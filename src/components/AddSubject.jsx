@@ -3,9 +3,11 @@ import { useSubjects } from "../context/SubjectsProvider";
 import AddForm from "./AddForm";
 import Card from "./Card";
 import SectionTitle from "./SectionTitle";
+import getRandomColor from "../helpers/getRandomColor";
 
 function AddSubject() {
   const { addSubject } = useSubjects();
+  const randomColor = getRandomColor();
   const [subjectName, setSubjectName] = useState("");
 
   function handleSubmit(e) {
@@ -15,6 +17,7 @@ function AddSubject() {
     const subject = {
       id: crypto.randomUUID(),
       name: subjectName,
+      themeColor: randomColor,
       tasks: [],
     };
 
