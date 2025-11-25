@@ -103,7 +103,9 @@ function SubjectsProvider({ children }) {
 
       const data = await res.json();
       dispatch({ type: "CREATE/SUBJECT", payload: data });
-      toast.success("Subject created");
+      toast.success("Subject created", {
+        pauseOnHover: false,
+      });
     } catch (error) {
       console.error(error.message);
       dispatch({ type: "error" });
@@ -155,7 +157,9 @@ function SubjectsProvider({ children }) {
 
       dispatch({ type: "UPDATE/SUBJECT", payload: { subjectId, newTitle } });
       dispatch({ type: "success" });
-      toast.success("Subject updated!");
+      toast.success("Subject updated!", {
+        pauseOnHover: false,
+      });
     } catch (error) {
       dispatch({ type: "error" });
       console.error(error.message);
@@ -175,7 +179,9 @@ function SubjectsProvider({ children }) {
 
       dispatch({ type: "DELETE/SUBJECT", payload: subjectId });
       dispatch({ type: "success" });
-      toast.success("Subject deleted");
+      toast.success("Subject deleted", {
+        pauseOnHover: false,
+      });
     } catch (error) {
       dispatch({ type: "error" });
       console.error(error.message);
@@ -213,7 +219,9 @@ function SubjectsProvider({ children }) {
 
       dispatch({ type: "ADD/TASK", payload: { newTask, subjectId } });
       dispatch({ type: "success" });
-      toast.success("Task created");
+      toast.success("Task created", {
+        pauseOnHover: false,
+      });
     } catch (error) {
       dispatch({ type: "error" });
       console.error(error.message);
@@ -266,7 +274,9 @@ function SubjectsProvider({ children }) {
       dispatch({ type: "success" });
 
       if (!Object.keys(updatedTask).includes("completed"))
-        toast.success("Task updated");
+        toast.success("Task updated", {
+          pauseOnHover: false,
+        });
     } catch (error) {
       dispatch({ type: "error" });
       console.error(error.message);
@@ -305,7 +315,9 @@ function SubjectsProvider({ children }) {
 
       dispatch({ type: "DELETE/TASK", payload: { subjectId, taskId } });
 
-      toast.success("Task deleted");
+      toast.success("Task deleted", {
+        pauseOnHover: false,
+      });
     } catch (error) {
       dispatch({ type: "error" });
       console.error(error.message);

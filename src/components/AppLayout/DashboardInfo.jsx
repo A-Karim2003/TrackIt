@@ -1,10 +1,10 @@
 import Card from "../Card";
 
-function DashboardInfo({ icon, title, quantity, bgColor }) {
+function DashboardInfo({ icon, title, quantity, bgColor, color }) {
   return (
     <Card>
       <div
-        className={`h-14 w-14 flex items-center justify-center rounded-md text-customGreen ${bgColor}`}
+        className={`h-14 w-14 flex items-center justify-center rounded-md ${color} ${bgColor}`}
       >
         {icon}
       </div>

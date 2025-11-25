@@ -2,7 +2,7 @@ import { NavLink, useLocation, useParams } from "react-router-dom";
 import { useSubjects } from "../../context/SubjectsProvider";
 
 const activeClass =
-  "h-full w-22 flex justify-center items-center border-b-2 border-[#44C1B3] cursor-pointer";
+  "h-full  flex justify-center items-center border-b-2 border-[#44C1B3] cursor-pointer";
 const defaultClass = "h-full w-22 flex justify-center items-center";
 
 function NavLinks() {

@@ -37,18 +37,21 @@ function Dashboard() {
         title={"Total Subjects"}
         quantity={subjects.length}
         bgColor={"bg-bgCustomGreen"}
+        color={"text-customGreen"}
       />
       <DashboardInfo
         icon={<LuCircleCheckBig className="h-10 w-10" />}
         title={"Completed Tasks"}
         quantity={`${numOfCompleted}/${allTasks.length}`}
         bgColor={"bg-bgCustomOrange"}
+        color={"text-customOrange"}
       />
       <DashboardInfo
         icon={<MdTrendingUp className="h-10 w-10" />}
         title={"Overall Progress"}
         quantity={`${percentOfComplete}%`}
         bgColor={"bg-bgCustomRed"}
+        color={"text-customRed"}
       />
 
       <SubjectOverview />

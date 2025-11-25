@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
 function Logo() {
   return (
     <div className="h-20 flex items-center gap-2 ">
-      <img src="/logo.png" alt="Logo" className="h-full" />
+      <Link to="/" className="h-full">
+        <img src="/logo.png" alt="Logo" className="h-full" />
+      </Link>
       <div className="flex flex-col justify-evenly h-[66%]">
         <strong className="text-sm leading-none tracking-wider">
           Learning Tracker
