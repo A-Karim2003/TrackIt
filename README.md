@@ -126,7 +126,7 @@ The application uses JSON Server as a mock backend with the following endpoints:
 ### Dashboard View
 
 ![Dashboard](/public//dashboard.png)
-_Overview of all subjects with statistics and progress tracking_
+_Overview of some subjects with statistics and progress tracking_
 
 ### Subjects Page
 
